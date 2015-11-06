@@ -1,0 +1,111 @@
+<MySource_AREA id_name="edit_plus_exit_area" design_area="exit" print="no"></MySource_AREA>
+<MySource_AREA id_name="edit_plus_token" design_area="csrf_token" print="no"></mysource_area>
+<MySource_AREA id_name="edit_plus_nested_content" design_area="nest_content" cache="1" print="no" />
+<MySource_AREA id_name="edit_plus_show_if" design_area="show_if">
+  <MySource_SET name="condition" value="simple_edit_mode" />
+  <MySource_THEN>
+    
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Loading Edit Mode...</title>
+        <MySource_PRINT id_name="edit_plus_nested_content" />
+      </head>
+      <body>
+        <mysource_print id_name="edit_plus_token" />
+      </body>
+    </html>
+    
+    <MySource_PRINT id_name="edit_plus_exit_area" />
+  </MySource_THEN>
+</MySource_AREA> 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><MySource_PRINT id_name="__global__" var="asset_name" /> - <MySource_PRINT id_name="__global__" var="site_name" /></title>
+
+        <link rel="icon" href="favicon.ico">
+        <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <MySource_AREA id_name="metadata" design_area="metadata" />
+
+        <!-- Styles and Preloaded Scripts -->
+        <MySource_AREA id_name="scripts_head" design_area="nest_content" cache="1" />
+    </head>
+    <!--[if lt IE 7]><body class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+    <!--[if IE 7]><body class="no-js lt-ie9 lt-ie8"><![endif]-->
+    <!--[if IE 8]><body class="no-js lt-ie9"><![endif]-->
+    <!--[if gt IE 8]><!-->
+    <body class="no-js">
+    <!--<![endif]-->
+
+    <div id="page-wrapper" class="page-wrapper">
+        <!--noindex-->
+        <MySource_AREA id_name="skip_links" design_area="nest_content" cache="1" />
+
+        <header class="header clearfix" role="banner">
+            <div class="banner">
+                <MySource_AREA id_name="layout_header" design_area="nest_content" cache="1" />
+            </div>
+            <MySource_AREA id_name="nav_main" design_area="menu_normal">
+                <MySource_SET name="level" value="top" />
+                <MySource_SET name="show_subs" value="always" />
+                <MySource_SET name="settings.class.normal" value="" />
+                <MySource_SET name="settings.class.current" value=" current" />
+                <MySource_SET name="settings.class.hierarchy" value=" parent" />
+                <MySource_DIVIDER></MySource_DIVIDER>
+                <nav id="nav-main">
+                    <button type="button" id="toggle-nav-main" class="visuallyhidden nav-main__toggle">Show Main Navigation</button>
+                    <ul class="nav-main__list">
+                        <MySource_ASSET>
+                            <li class="nav-main__item<MySource_PRINT var='settings.class' />">
+                                <a href="<MySource_PRINT var='asset_url' />" class="nav-main__link"><MySource_PRINT var="asset_name" /></a>
+                                <MySource_SUB design_area="menu_normal">
+                                    <MySource_SET name="show_subs" value="always" />
+                                    <MySource_SET name="settings.class.normal" value="" />
+                                    <MySource_SET name="settings.class.current" value=" current" />
+                                    <MySource_SET name="settings.class.hierarchy" value=" parent" />
+                                    <ul>
+                                        <MySource_ASSET><li class="nav-main-lvl-02__item<MySource_PRINT var='settings.class' />"><a href="<MySource_PRINT var='asset_url' />" class="nav-main__link"><MySource_PRINT var="asset_name" /></a></li></MySource_ASSET>
+                                    </ul>
+                                </MySource_SUB>
+                            </li>
+                        </MySource_ASSET>
+                    </ul>
+                </nav>
+            </MySource_AREA>
+        </header>
+
+        <MySource_AREA id_name="nav_breadcrumbs" design_area="asset_lineage">
+            <MySource_SET name="start_at_level" value="1" />
+            <MySource_SET name="prefix_with_divider" value="false" />
+            <MySource_SET name="suffix_with_divider" value="false" />
+            <MySource_SET name="prefix_with_home_link" value="false" />
+            <MySource_SET name="suffix_with_current_link" value="false" />
+            <MySource_DIVIDER></MySource_DIVIDER>
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs__item home"><a href="<MySource_PRINT id_name='__global__' var='site_link' full_url='true' />" class="breadcrumbs__link">Home</a></li>
+                <MySource_ASSET><li class="breadcrumbs__item"><a href="<MySource_PRINT var='asset_link' />" class="breadcrumbs__link"><MySource_PRINT var="asset_name" /></a></li></MySource_ASSET>
+                <li class="breadcrumbs__item current"><strong><MySource_PRINT id_name="__global__" var="asset_name" /></strong></li>
+            </ul>
+        </MySource_AREA>
+
+        <main id="main" role="main" class="main">
+            <!--endnoindex-->
+            <MySource_AREA id_name="body" design_area="body" />
+            <!--noindex-->
+        </main>
+
+        <footer class="footer" role="contentinfo">
+            <MySource_AREA id_name="layout_footer" design_area="nest_content" cache="1" />
+        </footer>
+
+    <!-- /.page-wrapper --></div>
+    <MySource_AREA id_name="scripts_foot" design_area="nest_content" cache="1" />
+    <!--endnoindex-->
+    </body>
+</html>

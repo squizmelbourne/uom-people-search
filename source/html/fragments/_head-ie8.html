@@ -1,0 +1,39 @@
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="referrer" content="always">
+        <link rel="icon" href="favicon.ico">
+        <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- build:sass dist:styles/global.css -->
+                <!-- import:css source:styles/global.scss -->
+                <!-- import:css module:**/css/variables.scss -->
+                <!-- import:css module:**/css/global.scss {"header": "{{moduleComment path}}", "helpers": "source/js/helpers.js"} -->
+                <!-- import:content module:**/import/_css.html -->
+        <!-- endbuild -->
+        <!-- build:sass dist:styles/medium.css { "media": "(min-width: 37.5em)" } -->
+                <!-- import:css source:styles/imports/variables.scss -->
+                <!-- import:css source:styles/imports/functions.scss -->
+                <!-- import:css source:styles/imports/mixins.scss -->
+                <!-- import:css source:styles/medium.scss -->
+                <!-- import:css module:**/css/variables.scss -->
+                <!-- import:css module:**/css/medium.scss {"header": "{{moduleComment path}}", "helpers": "source/js/helpers.js"} -->
+        <!-- endbuild -->
+        <!-- build:sass dist:styles/wide.css { "media": "(min-width: 60em)" } -->
+                <!-- import:css source:styles/imports/variables.scss -->
+                <!-- import:css source:styles/imports/functions.scss -->
+                <!-- import:css source:styles/imports/mixins.scss -->
+                <!-- import:css source:styles/wide.scss -->
+                <!-- import:css module:**/css/variables.scss -->
+                <!-- import:css module:**/css/wide.scss {"header": "{{moduleComment path}}", "helpers": "source/js/helpers.js"} -->
+        <!-- endbuild -->
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="styles/medium.css" />
+            <link rel="stylesheet" href="styles/wide.css" />
+        <![endif]-->
+        <!-- build:sass dist:styles/print.css { "media": "print" } -->
+            <!-- import:css source:styles/print.scss -->
+            <!-- import:css module:**/css/print.scss -->
+        <!-- endbuild -->
+        <!-- build:js dist:js/vendor/modernizr.min.js -->
+            <!-- import:js bower:modernizr/modernizr.js -->
+        <!-- endbuild -->
+        <!-- import:content module:**/import/_head.html -->

@@ -1,0 +1,10 @@
+{
+  "name": "squiz-boilerplate-modules",
+  "description": "Custom boilerplate modules here",
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  }
+  
+}

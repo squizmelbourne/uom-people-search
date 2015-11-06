@@ -1,0 +1,44 @@
+{
+  "name": "people-search",
+  "version": "0.0.1",
+  "description": "A Squiz Boilerplate design cutup",
+  "authors": [
+    "root@squiz.net"
+  ],
+  "private": true,
+  "scripts": {
+    "postinstall": "if [ ! -d ./node_modules/modules ]; then cd ./node_modules && ln -s ../source/modules .; fi"
+  },
+  "dependencies": {
+    "browser-sync": "^2.9.x",
+    "browserify": "^12.0.1",
+    "cacheable-fs": "git://github.com/ironikart/cacheable-fs.git",
+    "chalk": "^1.1.1",
+    "classnames": "*",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-changed": "^1.3.0",
+    "gulp-compile-handlebars": "^0.5.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-squiz-boilerplate": "git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+    "gulp-util": "^3.0.6",
+    "gulp-watch": "^4.2.4",
+    "handlebars": "*",
+    "lodash": "^3.9.3",
+    "lodash.defaults": "^3.1.1",
+    "memwatch-next": "^0.2.9",
+    "minimist": "^1.1.1",
+    "react": "~0.13.0",
+    "reactify": "*",
+    "require-dir": "^0.3.0",
+    "through2": "^0.6.5",
+    "uglifyify": "^3.0.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}

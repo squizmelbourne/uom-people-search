@@ -1,0 +1,10 @@
+{
+  "name": "people-search",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "qunit": "~1.x",
+    "modernizr": "~2.x"
+  }
+}
