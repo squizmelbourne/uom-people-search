@@ -37,7 +37,7 @@ var React = require('react'),
               <ul>
               {this.props.people.constructor === Array ?
                   this.props.people.map(function(person) {
-                      return <li key={person.givenName}>{person.givenName}</li>
+                      return <Person personData={person} />
                   })
                   :
                   this.props.people.givenName
@@ -49,15 +49,16 @@ var React = require('react'),
     }),
     Person = React.createClass({
         render: function() {
+            var personData = this.props.personData;
             return (
                 <li>
                     <div className="profile">
                         <div className="frame">
-                            <img alt="Trevor Burnard" src="/assets/images/people-search/placeholder.png" />
+                            <img alt={personData.givenName} src="/assets/images/people-search/placeholder.png" />
                         </div>
                     </div>
                     <div className="details">
-                        <a href="#">Trevor Burnard</a><br />
+                        <a href="#">{personData.givenName}</a><br />
                         <em>Head Of School-Historical &amp; Philosophical Studies</em>
                     </div>
                     <div className="contact">
