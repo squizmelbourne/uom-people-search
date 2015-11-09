@@ -11,8 +11,14 @@ var React = require('react'),
             };
         },*/
         appendIfTrue: function(base, toAppend, test) {
-            if (!test) { return base; }
-            return [base].concat(toAppend).join(' ');
+          if (!test) { return base; }
+          return [base].concat(toAppend).join(' ');
+        },
+        checkImage: function(src, imgload, imgfail) {
+            var img = new Image();
+            img.onload = imgload;
+            img.onerror = imgfail;
+            img.src = src;
         },
         render: function() {
             var profileData = this.props.profile.data; //grab profile data from property
@@ -39,7 +45,7 @@ var React = require('react'),
                   this.props.people.map(function(person) {
                       return <Person personData={person} />
                   })
-                  :
+              :
                   this.props.people.givenName
               }
               </ul>
@@ -54,17 +60,20 @@ var React = require('react'),
                 <li>
                     <div className="profile">
                         <div className="frame">
+
                             <img alt={personData.givenName} src="/assets/images/people-search/placeholder.png" />
                         </div>
                     </div>
                     <div className="details">
                         <a href="#">{personData.givenName}</a><br />
-                        <em>Head Of School-Historical &amp; Philosophical Studies</em>
+                        <em>{personData.position}</em>
+                        <p>{personData.affiliation}</p>
                     </div>
                     <div className="contact">
-                      <p><a href="tel:03 83446886">03 83446886</a><br /><a href="mailto:tburnard@unimelb.edu.au">tburnard@unimelb.edu.au</a>
-                    </p>
+                      <p>
+                          { personData.telephone ? <a href='{personData.telephone}'>{personData.telephone}</a> : "" }
 
+                      </p>
                     </div>
                 </li>
             );
