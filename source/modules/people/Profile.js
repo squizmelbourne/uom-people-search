@@ -2,6 +2,7 @@
 /*eslint no-unused-vars: 0*/
 
 var React = require('react'),
+    CheckImage = require('../check-image/CheckImage.js'),
 
     Profile = React.createClass({
 
@@ -11,14 +12,8 @@ var React = require('react'),
             };
         },*/
         appendIfTrue: function(base, toAppend, test) {
-          if (!test) { return base; }
-          return [base].concat(toAppend).join(' ');
-        },
-        checkImage: function(src, imgload, imgfail) {
-            var img = new Image();
-            img.onload = imgload;
-            img.onerror = imgfail;
-            img.src = src;
+            if (!test) { return base; }
+            return [base].concat(toAppend).join(' ');
         },
         render: function() {
             var profileData = this.props.profile.data; //grab profile data from property
@@ -39,11 +34,11 @@ var React = require('react'),
         render: function() {
             return (
               <div>
-              <h3>this.props.name</h3>
+              <h3>{this.props.name}</h3>
               <ul>
               {this.props.people.constructor === Array ?
-                  this.props.people.map(function(person) {
-                      return <Person personData={person} />
+                  this.props.people.map(function(person, i) {
+                      return <Person key={i} personData={person} />
                   })
               :
                   this.props.people.givenName
@@ -54,14 +49,29 @@ var React = require('react'),
         }
     }),
     Person = React.createClass({
+        getInitialState: function(){
+          return {
+            profileImage: ''
+          }
+        },
+        componentWillMount: function(){
+          var profileID = this.props.personData.personID;
+          var profileImageURL = 'https://findanexpert.unimelb.edu.au/pictures/thumbnail'+profileID+'picture';
+          var person = this;
+          CheckImage(profileImageURL).then(
+              function(url){
+                person.setState({profileImage: <img src={profileImageURL} alt="profile" />})
+              }).catch(function(url){
+                person.setState({profileImage: <img src="https://staff.unimelb.edu.au/directory/images/placeholder.png" alt="profile" />})
+              })
+        },
         render: function() {
             var personData = this.props.personData;
             return (
                 <li>
                     <div className="profile">
                         <div className="frame">
-
-                            <img alt={personData.givenName} src="/assets/images/people-search/placeholder.png" />
+                            {this.state.profileImage}
                         </div>
                     </div>
                     <div className="details">
@@ -71,9 +81,10 @@ var React = require('react'),
                     </div>
                     <div className="contact">
                       <p>
-                          { personData.telephone ? <a href='{personData.telephone}'>{personData.telephone}</a> : "" }
+                          {personData.telephone ? <div><a href='tel:{personData.telephone}'>{personData.telephone}</a><br /></div>:''}
 
-                      </p>
+                    </p>
+
                     </div>
                 </li>
             );

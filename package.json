@@ -10,6 +10,7 @@
     "postinstall": "if [ ! -d ./node_modules/modules ]; then cd ./node_modules && ln -s ../source/modules .; fi"
   },
   "dependencies": {
+    "bluebird": "^3.0.5",
     "browser-sync": "^2.9.x",
     "browserify": "^12.0.1",
     "cacheable-fs": "git://github.com/ironikart/cacheable-fs.git",
