@@ -60,9 +60,9 @@ var React = require('react'),
           var person = this;
           CheckImage(profileImageURL).then(
               function(url){
-                person.setState({profileImage: <img src={profileImageURL} alt="profile" />})
+                person.setState({profileImage: {profileImageURL} })
               }).catch(function(url){
-                person.setState({profileImage: <img src="https://staff.unimelb.edu.au/directory/images/placeholder.png" alt="profile" />})
+                person.setState({profileImage: "https://staff.unimelb.edu.au/directory/images/placeholder.png"})
               })
         },
         render: function() {
@@ -71,7 +71,7 @@ var React = require('react'),
                 <li>
                     <div className="profile">
                         <div className="frame">
-                            {this.state.profileImage}
+                            <img src={this.state.profileImage} alt="{personData.givenName} {personData.familyName}" />
                         </div>
                     </div>
                     <div className="details">
