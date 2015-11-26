@@ -14,13 +14,15 @@ var React = require('react'),
           "jobTitle" : "INTEGRATION DESIGNER",
           "peopleGroup" : "Professional Continuing",
           "affiliation" : "Project Services",
+          "telephone" : [ "+61390355806" ],
+          "mobile" : [ "0414967502" ],
+          "email" : [ "as-testsupport@unimelb.edu.au" ],
           "memberOf" : null,
           "locationCampus" : null,
           "workLocation" : null,
           "buildingNumber" : null,
           "locationFloor" : null,
           "locationRoom" : null,
-          "email" : "as-testsupport@unimelb.edu.au",
           "isExpert" : "N",
           "supervisor" : {
             "givenName" : "HANS",
@@ -55,7 +57,7 @@ var React = require('react'),
             "affiliation" : "Professional Continuing",
             "telephone" : [ "+61390355196" ],
             "email" : [ "as-testsupport@unimelb.edu.au" ],
-            "personID" : "080442"
+            "personID" : "195234"
           }, {
             "givenName" : "ALIAKBAR",
             "additionalName" : null,
@@ -71,11 +73,8 @@ var React = require('react'),
       };
 
 //instantiating top level components
-$('.profile').each(function(){
+$('.profile-div').each(function(){
     var div         = this,
         profile = React.createElement( Profile, { profile: profileData});
-
-    React.render(profile, div);
-
-
+        React.render(profile, div);
 });
