@@ -1,6 +1,12 @@
 'use strict';
 /*eslint no-unused-vars: 0*/
 
+function toTitleCase(str)
+{
+   if(str)
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 var React = require('react'),
     CheckImage = require('../check-image/CheckImage.js'),
 
@@ -20,7 +26,6 @@ var React = require('react'),
           }
         },
         componentWillMount: function(){
-            console.log(this.props.profile);
             var profileID = this.props.profile.data.personId;
             var buildingID = this.props.profile.data.buildingNumber;
             var profileImageURL = 'https://findanexpert.unimelb.edu.au/pictures/thumbnail'+profileID+'picture';
@@ -48,39 +53,39 @@ var React = require('react'),
             var profileData = this.props.profile.data, //grab profile data from property
                 profileName = profileData.givenName +" "+ profileData.familyName,
                 profilePhotoStyle = {backgroundImage: 'url('+ this.state.profileImage +')'},
-                buildingMapURL = "http://www.google.com.au/maps?hl=en&amp;q="+this.state.buildingMapCoord[0]+","+this.state.buildingMapCoord[1];
+                buildingMapURL = "http://www.google.com.au/maps?hl=en&q="+this.state.buildingMapCoord[0]+","+this.state.buildingMapCoord[1];
             return (
               <div>
                 <header className="profile-header">
                     <div className="profile-header__summary">
                         <div className="profile-header__photo" style={profilePhotoStyle}></div>
-                        <h1>{profileName}</h1>
-                        <p><em>{profileData.position}</em></p>
-                        <p>{profileData.departmentName}</p>
+                        <h1>{toTitleCase(profileName)}</h1>
+                        <p><em>{toTitleCase(profileData.position)}</em></p>
+                        <p>{toTitleCase(profileData.departmentName)}</p>
                     </div>
                     <div className="profile-header__info">
                         <ul className="profile-header__contact">
-                            {profileData.telephone ?
+                            {profileData.phone ?
                                 <li>
                                   <span className="icon--hide-label" data-icon="phone">Phone number</span>
-                                  <a href="tel:{profileData.telephone}"> {profileData.telephone}</a>
+                                  <a href={"tel:"+profileData.phone}> {profileData.phone}</a>
                                 </li>
                             :''}
                             {profileData.mobile ?
                                 <li>
                                   <span className="icon--hide-label" data-icon="smartphone">Mobile number</span>
-                                  <a href="tel:{profileData.mobile}"> {profileData.mobile}</a>
+                                  <a href={"tel:"+profileData.mobile}> {profileData.mobile}</a>
                                 </li>
                             :''}
                             {profileData.email ?
                                 <li>
                                   <span className="icon--hide-label" data-icon="mail">Email</span>
-                                  <a href="mailto:{profileData.email}"> {profileData.email}</a>
+                                  <a href={"mailto:"+profileData.email}> {profileData.email}</a>
                                 </li>
                             :''}
                             {profileData.faeExists === 'Y' ?
                                 <li>
-                                  <span data-icon="profile"></span> <a href="http://findanexpert.unimelb.edu.au/display/person{profileData.personId}">Find an Expert profile</a>
+                                  <span data-icon="profile"></span> <a href={"http://findanexpert.unimelb.edu.au/display/person"+profileData.personId}>Find an Expert profile</a>
                                 </li>
                             :''}
                         </ul>
@@ -88,7 +93,7 @@ var React = require('react'),
                           {/* display location information */}
                           {profileData.locationRoom ? <li><em>Room:</em> {profileData.locationRoom}</li> :''}
                           {profileData.locationFloor ? <li><em>Floor:</em> {profileData.locationFloor}</li> :''}
-                          {profileData.buildingNumber ? <li><em>Building:</em> <a href={buildingMapURL}>{profileData.buildingNumber}</a></li> : ''}
+                          {profileData.buildingNumber ? <li><em>Building:</em> <a href={buildingMapURL}>{profileData.workLocation}</a></li> : ''}
                           {profileData.locationCampus ? <li><em>Campus:</em> {profileData.locationCampus}</li> :''}
                         </ul>
                     </div>
@@ -165,12 +170,12 @@ var React = require('react'),
                     <div className="person__photo" style={profilePhotoStyle}></div>
                     <div className="person__info">
                         <div className="person__profile">
-                            <h3><a href={profileUrl} data-bound="true">{personData.givenName} {personData.additionalName} {personData.familyName}</a></h3>
-                            <p><em>{personData.position}</em></p><p>{personData.departmentName}</p>
+                            <h3><a href={profileUrl} data-bound="true">{toTitleCase(personData.givenName)} {toTitleCase(personData.familyName)}</a></h3>
+                            <p><em>{toTitleCase(personData.position)}</em></p><p>{toTitleCase(personData.departmentName)}</p>
                         </div>
                         <div className="person__contact">
-                            {personData.telephone ? <p className="person__phone"><a href="tel:{personData.telephone}">{personData.telephone}</a></p>:''}
-                            {personData.email ?  <p className="person__email"><a href="mailto:{personData.email}">{personData.email}</a></p>:''}
+                            {personData.phone ? <p className="person__phone"><a href={"tel:"+personData.phone}>{personData.phone}</a></p>:''}
+                            {personData.email ?  <p className="person__email"><a href={"mailto:"+personData.email}>{personData.email}</a></p>:''}
                         </div>
                     </div>
                 </li>
