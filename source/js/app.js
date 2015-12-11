@@ -13,9 +13,10 @@ var React = require('react'),
     requestProfileId = getParameterByName('id'),
     profileData = {};
 
-(function($) {
+if(requestProfileId) { //if id is not empty, display loading spinner
+    $(".profile-div").html('<div class="loading"><span>Loading...</span><div class="cube"></div></div>');
     //define staff API URL
-    var staffAPI = "http://staff.unimelb.edu.au/dev/people-search-new/staff-details-api-call?id=" + requestProfileId;
+    var staffAPI = "https://staff.unimelb.edu.au/staff-details-api-call?id=" + requestProfileId;
     //ajax and grab json object
 
     $.getJSON( staffAPI, {
@@ -24,13 +25,20 @@ var React = require('react'),
     .done(function( data ) {
       profileData = data;
       //render react profile component
-      console.log(profileData);
-      $('.profile-div').each(function(){
-          var div = this,
-              profile = React.createElement( Profile, { profile: profileData});
-              React.render(profile, div);
-      });
-      window.UOMbind('icons');
-    });
+      if(profileData.data){
+          $('.profile-div').each(function(){
+              var div = this,
+                  profile = React.createElement( Profile, { profile: profileData});
+                  React.render(profile, div);
+          });
+          window.UOMbind('icons');
+      }
+      else {
+        $(".profile-div").html('  <section class="alt"><h2 class="title">Something went wrong</h2><p class="center">We are sorry, but something just went wrong.</p><p class="center"><a class="button-hero-reverse" href="/">Go back to homepage</a></p></section><section><figure class="full-width"><img alt="Something is broken. Barry swears it wasn’t him." src="http://web.unimelb.edu.au/assets/images/500.jpg" /><figcaption>Something is broken. Barry swears it wasn’t him.</figcaption></figure></section>');
+      }
 
-})(jQuery);
+    })
+    .fail(function() {
+        $(".profile-div").html('  <section class="alt"><h2 class="title">Something went wrong</h2><p class="center">We are sorry, but something just went wrong.</p><p class="center"><a class="button-hero-reverse" href="/">Go back to homepage</a></p></section><section><figure class="full-width"><img alt="Something is broken. Barry swears it wasn’t him." src="http://web.unimelb.edu.au/assets/images/500.jpg" /><figcaption>Something is broken. Barry swears it wasn’t him.</figcaption></figure></section>');
+    })
+}
