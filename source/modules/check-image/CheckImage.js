@@ -1,4 +1,4 @@
-
+var Promise = require('es6-promise').Promise;
 var CheckImage = function(url) {
         return new Promise(function (resolve, reject) {
             var img = new Image()
