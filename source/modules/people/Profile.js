@@ -9,6 +9,7 @@ function toTitleCase(str)
 
 var React = require('react'),
     CheckImage = require('../check-image/CheckImage.js'),
+    EmailMasks = require('../email-masks/EmailMasks.js'),
 
 // Profile Module
 //--------------------------------------------------------------------------------------
@@ -80,7 +81,7 @@ var React = require('react'),
                             {profileData.email ?
                                 <li>
                                   <span className="icon--hide-label" data-icon="mail">Email</span>
-                                  <a href={"mailto:"+profileData.email}> {profileData.email}</a>
+                                  <a href={"mailto:"+EmailMasks(profileData.email)}> {EmailMasks(profileData.email)}</a>
                                 </li>
                             :''}
                             {profileData.faeExists === 'Y' ?
@@ -175,7 +176,7 @@ var React = require('react'),
                         </div>
                         <div className="person__contact">
                             {personData.phone ? <p className="person__phone"><a href={"tel:"+personData.phone}>{personData.phone}</a></p>:''}
-                            {personData.email ?  <p className="person__email"><a href={"mailto:"+personData.email}>{personData.email}</a></p>:''}
+                            {personData.email ?  <p className="person__email"><a href={"mailto:"+EmailMasks(personData.email)}>{EmailMasks(personData.email)}</a></p>:''}
                         </div>
                     </div>
                 </li>
