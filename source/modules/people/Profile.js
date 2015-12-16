@@ -23,7 +23,7 @@ var React = require('react'),
           //set profile image and building Map url states
           return {
             profileImage: '',
-            buildingMapCoord: 'test'
+            buildingMapCoord: ''
           }
         },
         componentWillMount: function(){
@@ -45,7 +45,7 @@ var React = require('react'),
             //ajax and grab json object
             $.getJSON(mapAPI)
             .done(function( data ) {
-                if(data.features[0].geometry.coordinates){
+                if(data.features[0].geometry.coordinates){ //set google map coordinates
                     profile.setState({buildingMapCoord: data.features[0].geometry.coordinates})
                 }
             });

@@ -33,12 +33,12 @@ if(requestProfileId) { //if id is not empty, display loading spinner
           });
           window.UOMbind('icons');
       }
-      else {
+      else { //if no data is returned, display something went wrong message.
         $(".profile-div").html('  <section class="alt"><h2 class="title">Something went wrong</h2><p class="center">We are sorry, but something just went wrong.</p><p class="center"><a class="button-hero-reverse" href="/">Go back to homepage</a></p></section><section><figure class="full-width"><img alt="Something is broken. Barry swears it wasn’t him." src="http://web.unimelb.edu.au/assets/images/500.jpg" /><figcaption>Something is broken. Barry swears it wasn’t him.</figcaption></figure></section>');
       }
 
     })
-    .fail(function() {
+    .fail(function() { //if JSON failed, display something went wrong message.
         $(".profile-div").html('  <section class="alt"><h2 class="title">Something went wrong</h2><p class="center">We are sorry, but something just went wrong.</p><p class="center"><a class="button-hero-reverse" href="/">Go back to homepage</a></p></section><section><figure class="full-width"><img alt="Something is broken. Barry swears it wasn’t him." src="http://web.unimelb.edu.au/assets/images/500.jpg" /><figcaption>Something is broken. Barry swears it wasn’t him.</figcaption></figure></section>');
     })
 }
