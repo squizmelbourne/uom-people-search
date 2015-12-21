@@ -45,9 +45,11 @@ var React = require('react'),
             //ajax and grab json object
             $.getJSON(mapAPI)
             .done(function( data ) {
+              if(data && data.features[0] && data.features[0].coordinates ){
                 if(data.features[0].geometry.coordinates){ //set google map coordinates
                     profile.setState({buildingMapCoord: data.features[0].geometry.coordinates})
                 }
+              }
             });
         },
         render: function() { //render profile

@@ -1,0 +1,34 @@
+/*Module Header Styles*/
+.combined_one {
+    background: white;
+}
+/*Module Footer Styles*/
+/*Module Header Styles*/
+.combined_two {
+    background: black;
+}
+/*Module Footer Styles*/
+/*Module Header Styles*/
+$variableTest: #000;
+
+body {
+    background: $variableTest;
+}
+/*Module Footer Styles*/
+/*Module Header Styles*/
+body {
+    background: green;
+}
+/*Module Footer Styles*/
+/*Module Header Styles*/
+body {
+    background: blue;
+}
+/*Module Footer Styles*/
+/*Module Header Wrap*/
+/* Start Media *//* This is the head */
+@media (min-width: 37.5em) {
+/*Module Footer Wrap*/
+/*Module Header Wrap*/
+/* End Media */}
+/*Module Footer Wrap*/

@@ -22,7 +22,7 @@
     "gulp-compile-handlebars": "^0.5.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-squiz-boilerplate": "git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+    "gulp-squiz-boilerplate": "file:./gulp-squiz-boilerplate",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
     "handlebars": "*",

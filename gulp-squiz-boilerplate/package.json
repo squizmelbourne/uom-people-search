@@ -1,0 +1,86 @@
+{
+  "_args": [
+    [
+      "gulp-squiz-boilerplate@git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+      "/Users/jasonlu/PLC/UOM/people-search-new"
+    ]
+  ],
+  "_from": "git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+  "_id": "gulp-squiz-boilerplate@0.0.7",
+  "_inCache": true,
+  "_location": "/gulp-squiz-boilerplate",
+  "_phantomChildren": {
+    "readable-stream": "2.0.4",
+    "xtend": "4.0.1"
+  },
+  "_requested": {
+    "name": "gulp-squiz-boilerplate",
+    "raw": "gulp-squiz-boilerplate@git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+    "rawSpec": "git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+    "scope": null,
+    "spec": "ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+    "type": "git"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git#a30bf1fdf7566704fe5063813fe1e721f7882d7e",
+  "_shasum": "c21299b787d5055b60d27406f8279c9df84865c5",
+  "_shrinkwrap": null,
+  "_spec": "gulp-squiz-boilerplate@git+ssh://git@gitlab.squiz.net:boilerplate/gulp-squiz-boilerplate.git",
+  "_where": "/Users/jasonlu/PLC/UOM/people-search-new",
+  "author": {
+    "name": "Anthony Barnes"
+  },
+  "dependencies": {
+    "cacheable-fs": "git://github.com/ironikart/cacheable-fs.git",
+    "deep-extend": "^0.4.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-duration": "0.0.0",
+    "gulp-markdown": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.7",
+    "handlebars": "^4.0.2",
+    "html-tokeniser": "https://github.com/ironikart/html-tokeniser.git",
+    "lodash": "^3.10.0",
+    "lodash.defaults": "^3.1.1",
+    "magic-paths": "git+https://github.com/ironikart/magic-paths.git",
+    "memory-cache": "^0.1.4",
+    "source-map": "^0.5.3",
+    "stream-array": "^1.1.1",
+    "stream-combiner": "^0.2.2",
+    "through2": "^2.0.0",
+    "vinyl": "^0.5.3"
+  },
+  "description": "Squiz Boilerplate gulp plugin",
+  "devDependencies": {
+    "async": "^1.5.0",
+    "bluebird": "^3.0.5",
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
+    "rimraf": "^2.4.0"
+  },
+  "gitHead": "a30bf1fdf7566704fe5063813fe1e721f7882d7e",
+  "installable": true,
+  "keywords": [
+    "html",
+    "parser",
+    "token"
+  ],
+  "main": "index.js",
+  "name": "gulp-squiz-boilerplate",
+  "optionalDependencies": {},
+  "readme": "# Gulp Squiz Boilerplate\n\nProcesses directives supplied in HTML files (gulp stream) as tokens using [html-tokeniser](https://github.com/ironikart/html-tokeniser). Uses a plugin system (tokeniser.transform()) to manipulate tokens and generate modified output.\n\n## Usage\n\nThe gulp squiz boilerplate works by pushing HTML content through the plugin. If you try to pipe through non HTML or invalid files you may encounter errors thrown by [htmlparser2](https://github.com/fb55/htmlparser2)\n\n```javascript\nvar gulp = require('gulp');\nvar Parser = require('gulp-squiz-boilerplate');\n\nvar parser = new Parser({\n    plugins: [\n        require('plugin1'),\n        require('plugin2')\n    ],\n});\n\ngulp.task('build', function() {\n    // Base build task\n    return gulp.src('source/html/*.html')\n        .pipe(parser.parse())\n        .pipe(gulp.dest('dist'));\n});\n\ngulp.task('watch', ['build'], function() {\n    // Watch and rebuild on watchlist dependency changes\n    // Note: requires plugins to notify dependent file relationships via\n    // ./util/relations.js\n    watch(parser.getWatchList())\n       .pipe(parser.expireCache())\n       .pipe(parser.watchHandler())\n       .pipe(parser.parse())\n       .pipe(gulp.dest('dist'));\n\n    // Watch and rebuild on base HTML changes\n    watch('source/html/*.html')\n        .pipe(parser.expireCache())\n        .pipe(parser.parse())\n        .pipe(gulp.dest('dist'));\n});\n```\n## Plugins\n\nThe boilerplate parser has 7 plugins available by default that transform the HTML in different ways. The `build` plugins share common functionality that transform not only the token itself, but all tokens found between a start and end block.\n\n### Build CSS\n\nExample source:\n```html\n<!-- build:css output/styles/main.scss { \"media\": \"(min-width: 60em)\" } -->\n    <!-- import:css input/styles/main.scss -->\n    <!-- import:css input/styles/concat.css -->\n<!-- endbuild -->\n```\n\n### Build JS\n\nExample source:\n```html\n<!-- build:js output/js/main.js -->\n    <script src=\"input/js/test.js\"></script>\n<!-- endbuild -->\n```\n\nThe above example will output a file called `main.js` in the path `output/js`. The transformation plugin will leave the following HTML in place of the build directives:\n```html\n<script src=\"output/js/main.js\"></script>\n```\n\n### Build Sass\n\nExample source:\n```html\n<!-- build:sass output/styles/main.css { \"sourcemaps\": true } -->\n    <link rel=\"stylesheet\" href=\"input/styles/main.scss\" />\n<!-- endbuild -->\n```\n\n### Comment\n\nExample source:\n```html\n<!--@@ This is an internal comment and will be stripped out @@-->\n\n<!--@@ This\nis a \nmultiline comment\nthat will be stripped out\n@@-->\n```\n\n### Import Content\n\nThe content import plugin is a special one amongst the other import style directives. When a `.html` file extension is detected the parser will recursively parse any subsequent HTML files with the HTML tokeniser and apply the plugins. This allows for complex nesting arrangements between directives.\n\nThis plugin also parses Handlebars templates when called with `import:handlebars` instead of `import:content`\n\nExample source:\n```html\n<!-- import:content path/to/other.html -->\n```\n\nExample handlebars:\n```html\n<!-- import:handlebars templates/template.hbs {\"data\": \"data.json\", \"helpers\": \"helpers.js\"} -->\n```\n\n**Note:** If the plugin does not detect HTML or Handlebars content it will not turn the resulting content into Tokenised HTML. This means that any plugins downstream will see the resulting content as a single 'text' token even if it is returning HTML. The reason for this is to cover use cases where you might want to import the content of another text file (e.g. *.txt or *.svg into the HTML but have it otherwise unmodified).\n\nIt is recommended that this plugin always be invoked first so that nested content can be brought in and passed to all other downstream plugins.\n\n### Import Markdown\n\nTurns markdown content into tokenised HTML and passes it to downstream plugins\n\nExample source:\n```html\n<!-- import:markdown test/fixtures/README.md -->\n````\n\n### Import Tag\n\nThe import tag plugin currently covers 2 flavours, JS and CSS. This produces respective `<script>` and `<link>` tokens to be handled by downstream plugins.\n\nExample source:\n```html\n<!-- import:css input/styles/main.css -->\n<!-- import:js input/js/main.js -->\n```\n\nIf the directive is called with `header` or `footer` options it is possible to wrap all matching files in a glob pattern with dynamic header and footer content to downstream `build` directives, e.g:\n```html\n<!-- build:css output/styles/headers.scss -->\n    <!-- import:css input/styles/*.scss {\"header\": \"/*Module Header {{moduleName path}}*/\\n\", \"footer\": \"\\n/*Module Footer {{moduleName path}}*/\", \"helpers\": \"input/js/helpers.js\"} -->\n<!-- endbuild -->\n```\n\n## Options\n\n`plugins` - `Array` - An array of functions that return transform streams of html-tokeniser tokens\n\n## Methods\n\n### parse()\n\nMain gulp plugin for transforming HTML content via plugins\n\n### getWatchList()\n\nGets an array of files to watch as reported by previous parse() runs\n\n### expireCache()\n\nExpire any vinyl files from internal caching as they pass through the stream\n\n### watchHandler()\n\nHandle the watchList files expiring individual caches and emits vinyl file objects that represent 'parent' files that passed through the parse() method.",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://gitlab.squiz.net:abarnes/gulp-squiz-boilerplate.git"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "version": "0.0.7"
+}
