@@ -45,7 +45,7 @@ var React = require('react'),
             //ajax and grab json object
             $.getJSON(mapAPI)
             .done(function( data ) {
-              if(data && data.features[0] && data.features[0].coordinates ){
+              if(data && data.features[0] && data.features[0].geometry.coordinates ){
                 if(data.features[0].geometry.coordinates){ //set google map coordinates
                     profile.setState({buildingMapCoord: data.features[0].geometry.coordinates})
                 }
@@ -96,7 +96,7 @@ var React = require('react'),
                           {/* display location information */}
                           {profileData.locationRoom ? <li><em>Room:</em> {profileData.locationRoom}</li> :''}
                           {profileData.locationFloor ? <li><em>Floor:</em> {profileData.locationFloor}</li> :''}
-                          {profileData.buildingNumber ? <li><em>Building:</em> <a href={buildingMapURL}>{profileData.workLocation}</a></li> : ''}
+                          {profileData.buildingNumber ? <li><em>Building:</em> <a target="_blank" href={buildingMapURL}>{profileData.workLocation}</a></li> : ''}
                           {profileData.locationCampus ? <li><em>Campus:</em> {profileData.locationCampus}</li> :''}
                         </ul>
                     </div>
