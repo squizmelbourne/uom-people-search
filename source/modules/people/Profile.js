@@ -1,10 +1,25 @@
 'use strict';
 /*eslint no-unused-vars: 0*/
 
-function toTitleCase(str)
+function toTitleCase_old(str)
 {
    if(str)
       return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function toTitleCase(name) {
+    var replacer = function (whole, prefix, word) {
+        ret = [];
+        if (prefix) {
+            ret.push(prefix.charAt(0).toUpperCase());
+            ret.push(prefix.substr(1).toLowerCase());
+        }
+        ret.push(word.charAt(0).toUpperCase());
+        ret.push(word.substr(1).toLowerCase());
+        return ret.join('');
+    }
+    var pattern = /\b(ma?c)?([a-z]+)/ig;
+    return name.replace(pattern, replacer);
 }
 
 var React = require('react'),
